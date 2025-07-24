@@ -23,9 +23,9 @@ const Breadcrumb = () => {
     ]
 
     return (
-        <div className="flex flex-col gap-[10px] pt-5">
+        <div className="flex flex-col">
         
-            <ol className="flex items-center gap-[5px] bg-green-100 py-5 px-3 rounded-md">
+            <ol className="flex items-center gap-[5px] bg-[#e6a8ff77] py-5 px-3 rounded-md">
                 {
                     breadcrumbItems?.map((item, index) => (
                         <>
@@ -41,6 +41,9 @@ const Breadcrumb = () => {
                     ))
                 }
             </ol>
+            <div className="flex items-center gap-[5px] bg-[#e6a8ff77] py-5 px-3 rounded-md mt-2">
+            <h4 className="text-xl">Near : <span className="text-red-500">Mawlana Bhasani Science and Technology University</span></h4>
+            </div>
         </div>
     );
 };

@@ -2,16 +2,18 @@
 import { useState } from "react";
 import Dropdown from '../components/Dropdown';
 import Card from "../components/Card";
+import Modal from "../components/Modal";
 
 const Home = () => {
 
 const [location, setLocation] = useState('')
     return (
         <div>
-             <main className="container mx-auto pt-5">
+          <Modal/>
+             <main className="container mx-auto py-5">
          <h1 className="text-2xl font-bold mb-6 text-center">Select Location:</h1>
       <Dropdown setLocation={setLocation} />
-         <div className="w-full rounded-lg shadow-xl min-h-screen md:p-5 border">
+         <div className="w-full rounded-t-lg min-h-screen md:p-5">
        { location && <h2 className="text-2xl p-4"> Find Rooms in: <span className="text-red-500">{location}</span> area: </h2>}
         <hr />
       <div className="grid md:grid-cols-3 lg:grid-cols-4 w-full pt-10 gap-7">

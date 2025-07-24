@@ -7,3 +7,18 @@ body {
 .nav-bg{
 background: linear-gradient(90deg,rgba(217, 156, 255, 1) 33%, rgba(133, 235, 255, 1) 100%);
 }
+
+.left-hov:hover{
+    background: #ffffff8a;
+background: linear-gradient(90deg,rgba(255, 255, 255, 0.486) 51%, rgba(255, 255, 255, 0) 100%);
+transition: all;
+transition-duration: 300ms;
+cursor: pointer;
+}
+.right-hov:hover{
+    background: #ffffff;
+background: linear-gradient(90deg,rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.486) 51%);
+transition: all;
+transition-duration: 300ms;
+cursor: pointer;
+}

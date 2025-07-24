@@ -514,7 +514,7 @@ export default function Dropdown({setLocation} : DropdownProp) {
           ))}
         </select>
       )}
-      <div className='py-0  my-0 text-center w-full'>OR</div> <hr />
+      <div className='pb-5  my-0 text-center w-full'>OR</div>
 
 
        <select

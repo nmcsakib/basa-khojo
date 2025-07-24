@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BiStar } from "react-icons/bi";
 import { BsWhatsapp } from "react-icons/bs";
+import { FaFacebook } from "react-icons/fa";
 
 
 const Basa = () => {
@@ -14,6 +15,8 @@ const Basa = () => {
 
     return  (<>
         <div className="px-6 md:px-16 lg:px-32 pt-14 space-y-10 min-h-screen pb-10">
+            <Breadcrumb/>
+              <hr className="bg-gray-600" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="px-5 lg:px-16 xl:px-20">
                     <div className="rounded-lg overflow-hidden bg-gray-500/10 mb-4">
@@ -80,20 +83,20 @@ const Basa = () => {
                         </div>
                         <p>(4.5)</p>
                     </div>
-                    <p className="text-gray-600 mt-3">
-                        This basa is very cool, 24/7 wifi, no loadsheeding. Meal available, only good students are there. No smoking is allowed here.
+                    <p className="text-gray-600 text-xl mt-3">
+                        Last Update: 20/07/2025 
                     </p>
                     <p className="text-3xl font-medium mt-6">
                         Rent: $ 2,500
                     </p>
-                       <div className="flex gap-7 py-6">
+                       <div className="flex flex-col md:flex-row gap-7 py-6">
                           <button
                 className="px-6 py-2 flex justify-center items-center gap-2 border border-[#06aa97] bg-[#06aa97] text-[#fff] hover:bg-white hover:text-[#06aa97] dark:hover:bg-transparent transition duration-300 rounded ">
                 <BsWhatsapp/> Contact Number
             </button>
             <button
-                className="px-6 py-2 border border-[#3B9DF8] bg-[#3B9DF8] text-white hover:bg-white hover:text-blue-500  transition duration-300 rounded ">
-                Facebook ID
+                className="px-6 py-2 border border-[#3B9DF8] bg-[#3B9DF8] text-white hover:bg-white hover:text-blue-500  transition duration-300 rounded flex justify-center items-center gap-2">
+               <FaFacebook/> Facebook ID
             </button>
                        </div>
                      <h2 className="text-3xl font-medium">Details:</h2>
@@ -125,9 +128,10 @@ const Basa = () => {
                         </table>
                     </div>
          <div>
-            <h2 className="text-3xl font-medium">Location:</h2>
-         <hr className="bg-gray-600 my-2" />
-            <Breadcrumb/>
+            <h2 className="text-3xl font-medium">Summary:</h2>
+             <p className="text-gray-600 text-xl mt-3">
+                        This basa is very cool, 24/7 wifi, no loadsheeding. Meal available, only good students are there. No smoking is allowed here. 
+                    </p>
          </div>
                  
                 </div>
