@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 // react icons
 import { RxCross1 } from "react-icons/rx";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import Link from "next/link";
 
 const Modal = () => {
     const [isModalOpen, setIsModalOpen] = useState(true);
@@ -51,10 +52,10 @@ const Modal = () => {
 
 
                     <div className="flex flex-col md:flex-row gap-7 py-6">
-                        <button onClick={() => setIsModalOpen(false)}
+                        <Link href="/landlord" onClick={() => setIsModalOpen(false)}
                             className="px-6 py-2 flex justify-center items-center gap-2 border border-[#06aa97] bg-[#06aa97] text-[#fff] hover:bg-white hover:text-[#06aa97] dark:hover:bg-transparent transition duration-300 rounded ">
                             Landlord
-                        </button>
+                        </Link>
                         <div
                             className="flex items-center rounded bg-[#3B9DF8] border-none outline-none text-[#fff] justify-between relative">
                             <button
