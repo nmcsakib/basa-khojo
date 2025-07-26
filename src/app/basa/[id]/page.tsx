@@ -10,20 +10,33 @@ import { FaFacebook } from "react-icons/fa";
 
 
 const Basa = () => {
-
+const [mainImage, setMainImage] = useState('');
     const { id } = useParams()
-
+    const images = [
+        {
+            image1: "https://t3.ftcdn.net/jpg/12/13/72/80/360_F_1213728051_pFIL7Ysaklimctx4U9s0wNvH4oKrNPCO.webp"
+        },
+        {
+            image1: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNob2VzfGVufDB8fDB8fHww"
+        },
+        {
+            image1: "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?cs=srgb&dl=pexels-sulimansallehi-1704488.jpg&fm=jpg"
+        },
+        {
+            image1: "https://t4.ftcdn.net/jpg/07/41/71/93/240_F_741719394_C9BP3YbiXSJ7WspSDLtKdYxZKKWlf0Jz.jpg"
+        }
+    ]
     return  (<>
-        <div className="px-6 md:px-16 lg:px-32 pt-14 space-y-10 min-h-screen pb-10">
+        <div className="px-5 md:px-16 lg:px-32 pt-4 space-y-10 min-h-screen pb-10 backdrop-blur-xs w-11/12 mx-auto my-10 rounded-2xl border border-cyan-300">
             <Breadcrumb/>
-              <hr className="bg-gray-600" />
+            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="px-5 lg:px-16 xl:px-20">
-                    <div className="rounded-lg overflow-hidden bg-gray-500/10 mb-4">
+                <div className="lg:px-16 xl:px-20">
+                    <div className="rounded-lg overflow-hidden mb-4">
                         <Image
-                           src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNob2VzfGVufDB8fDB8fHww"
+                           src={mainImage || images?.[0].image1}
                 alt=""
-                            className="w-full h-auto object-cover mix-blend-multiply"
+                            className="w-full h-auto object-cover border border-white"
                             width={1280}
                             height={720}
                         />
@@ -31,46 +44,21 @@ const Basa = () => {
 
                     <div className="grid grid-cols-4 gap-4">
                       
-                            <div
-                                // onClick={() => setMainImage(image)}
-                                className="cursor-pointer rounded-lg bg-gray-500/10 flex gap-3"
+                            <div className="cursor-pointer rounded-lg flex gap-3"
                             >
-                                <Image
-                                    src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNob2VzfGVufDB8fDB8fHww"
-                                    alt="alt"
-                                    className="w-full h-auto object-cover mix-blend-multiply"
-                                    width={1280}
-                                    height={720}
-                                />
-                                <Image
-                                    src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNob2VzfGVufDB8fDB8fHww"
-                                    alt="alt"
-                                    className="w-full h-auto object-cover mix-blend-multiply"
-                                    width={1280}
-                                    height={720}
-                                />
-                                <Image
-                                    src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNob2VzfGVufDB8fDB8fHww"
-                                    alt="alt"
-                                    className="w-full h-auto object-cover mix-blend-multiply"
-                                    width={1280}
-                                    height={720}
-                                />
-                                <Image
-                                    src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNob2VzfGVufDB8fDB8fHww"
-                                    alt="alt"
-                                    className="w-full h-auto object-cover mix-blend-multiply"
-                                    width={1280}
-                                    height={720}
-                                />
+                               {
+                                images.map((img, index) =>
+                               <Image key={index} onClick={()=>setMainImage(img.image1)} width={200} height={200} alt="pic" src={img.image1} className="w-full h-auto object-cover border border-white"/>
+                                )
+                               }                        
                             </div>
 
                         
                     </div>
                 </div>
 
-                <div className="flex flex-col">
-                    <h1 className="text-3xl font-medium text-gray-800/90 mb-4">
+                <div className="flex flex-col text-white">
+                    <h1 className="text-3xl font-medium text-white mb-4">
                         This is Basa
                     </h1>
                     <div className="flex items-center gap-2">
@@ -83,11 +71,11 @@ const Basa = () => {
                         </div>
                         <p>(4.5)</p>
                     </div>
-                    <p className="text-gray-600 text-xl mt-3">
+                    <p className="text-white text-xl mt-3">
                         Last Update: 20/07/2025 
                     </p>
                     <p className="text-3xl font-medium mt-6">
-                        Rent: $ 2,500
+                        ভাড়া: $ 2,500
                     </p>
                        <div className="flex flex-col md:flex-row gap-7 py-6">
                           <button
@@ -103,33 +91,34 @@ const Basa = () => {
                     <div className="overflow-x-auto pt-3 pb-6">
                         <table className="table-auto border-collapse w-full text-lg border">
                             <tbody>
+                                 <tr className="border py-5 text-red-300">
+                                    <td className=" font-medium border text-center">সিট বাকি:</td>
+                                    <td className="text-center">02</td>
+                                </tr>
                                 <tr className="border py-5">
-                                    <td className="text-gray-600 font-medium border text-center">Bed Room</td>
+                                    <td className=" font-medium border text-center">বেডরুম</td>
                                     <td className="text-center"> 02</td>
                                 </tr>
                                 <tr className="border py-5">
-                                    <td className="text-gray-600 font-medium border text-center">Kitchen:</td>
+                                    <td className=" font-medium border text-center"> কিচেন:</td>
                                     <td className="text-center">01</td>
                                 </tr>
                                 <tr>
-                                    <td className="text-gray-600 font-medium border text-center">Bathroom:</td>
+                                    <td className=" font-medium border text-center">বাথরুম :</td>
                                     <td className="text-center">02</td>
                                 </tr>
                                 <tr className="border py-5">
-                                    <td className="text-gray-600 font-medium border text-center">Balcony:</td>
+                                    <td className=" font-medium border text-center">বারান্দা:</td>
                                     <td className="text-center">01</td>
                                 </tr>
-                                <tr className="border py-5">
-                                    <td className="text-gray-600 font-medium border text-center">Bathroom:</td>
-                                    <td className="text-center">02</td>
-                                </tr>
+                               
                                
                             </tbody>
                         </table>
                     </div>
          <div>
             <h2 className="text-3xl font-medium">Summary:</h2>
-             <p className="text-gray-600 text-xl mt-3">
+             <p className=" text-xl mt-3">
                         This basa is very cool, 24/7 wifi, no loadsheeding. Meal available, only good students are there. No smoking is allowed here. 
                     </p>
          </div>

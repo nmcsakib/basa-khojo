@@ -1,4 +1,3 @@
-
 'use client'; 
 import { useEffect, useState } from 'react';
 interface Location {
@@ -7,8 +6,22 @@ interface Location {
 }
 
 interface DropdownProp {
-  setLocation: (location: string) => void;
+  setLocation: (location: {
+    division?: string;
+    district?: string;
+    upazila?: string;
+    union?: string;
+    university?: {
+    
+    "id": string,
+    "bn_name": string,
+    "en_name": string,
+    "short_form": string,
+    "district": string
+    };
+  }) => void;
 }
+
 export default function Dropdown({setLocation} : DropdownProp) {
     const [divisions, setDivisions] = useState<Location[]>([]);
     const [divisionId, setDivisionId] = useState('');
@@ -393,9 +406,6 @@ export default function Dropdown({setLocation} : DropdownProp) {
   }
 ]
 
-
-    console.log();
-
     useEffect(() => {
         fetch('https://bdapi.vercel.app/api/v.1/division').then(res => res.json()).then(data => setDivisions(data.data)).catch(err => console.error('Failed to fetch', err));
     }, [])
@@ -412,22 +422,20 @@ export default function Dropdown({setLocation} : DropdownProp) {
         fetch(`https://bdapi.vercel.app/api/v.1/union/${upazilaId}`).then(res => res.json()).then(data => setUnions(data.data)).catch(err => console.error('Failed to fetch', err));
     }, [upazilaId])
 
-    console.log(divisions);
-
     return (
-          <div className="space-y-4 max-w-md mx-auto p-6 bg-white rounded-xl shadow-md">
+          <div className="space-y-4 max-w-md mx-auto p-6 border border-cyan-700 bg-gradient-to-l to-slate-900 from-slate-600 text-slate-300 rounded-xl shadow-md myFont2">
       {/* Division */}
       <select
-        className="w-full border p-2 rounded"
+        className="w-full border border-slate-400 outline-0 p-2 rounded bg-slate-800"
         value={divisionId}
        onChange={(e) => {
     const selectedId = e.target.value;
     setDivisionId(selectedId);
 
-    const selectedDivision = divisions.find(div => div.id === selectedId);
-    if (selectedDivision) {
-      setLocation(selectedDivision.bn_name);
-    }
+   const selectedDivision = divisions.find(div => div.id === selectedId);
+if (selectedDivision) {
+  setLocation({ division: selectedDivision.bn_name });
+}
     setUniversityId('')
           setDistrictId('');
           setUpazilaId('');
@@ -437,7 +445,7 @@ export default function Dropdown({setLocation} : DropdownProp) {
           setUnions([]);
         }}
       >
-        <option value="">Select Division</option>
+        <option value="">বিভাগ নির্বাচন করুন</option>
         {divisions.map((div) => (
           <option key={div.id} label={div.bn_name} value={div.id}>{div.bn_name}</option>
         ))}
@@ -446,23 +454,27 @@ export default function Dropdown({setLocation} : DropdownProp) {
       {/* District */}
       {districts.length > 0 && (
         <select
-          className="w-full border p-2 rounded"
+          className="w-full border p-2 rounded bg-slate-800 border-slate-400 outline-0"
           value={districtId}
           onChange={(e) => {
               const selectedId = e.target.value;
     setDistrictId(selectedId);
 
-    const selectedDistrict = districts.find(div => div.id === selectedId);
-    if (selectedDistrict) {
-      setLocation(selectedDistrict.bn_name);
-    }
+   const selectedDistrict = districts.find(dis => dis.id === selectedId);
+if (selectedDistrict) {
+  setLocation({ 
+    division: divisions.find(d => d.id === divisionId)?.bn_name,
+    district: selectedDistrict.bn_name 
+  });
+}
+
             setUpazilaId('');
             setUnionId('');
             setUpazilas([]);
             setUnions([]);
           }}
         >
-          <option value="">Select District</option>
+          <option value="">জেলা নির্বাচন করুন</option>
           {districts.map((dis) => (
             <option key={dis.id} value={dis.id}>{dis.bn_name}</option>
           ))}
@@ -472,21 +484,26 @@ export default function Dropdown({setLocation} : DropdownProp) {
       {/* Upazila */}
       {upazilas.length > 0 && (
         <select
-          className="w-full border p-2 rounded"
+          className="w-full border border-slate-400 outline-0 p-2 rounded bg-slate-800"
           value={upazilaId}
           onChange={(e) => {
              const selectedId = e.target.value;
     setUpazilaId(selectedId);
 
-    const selectedUpazilla = upazilas.find(div => div.id === selectedId);
-    if (selectedUpazilla) {
-      setLocation(selectedUpazilla.bn_name);
-    }
+    const selectedUpazilla = upazilas.find(upz => upz.id === selectedId);
+if (selectedUpazilla) {
+  setLocation({
+    division: divisions.find(d => d.id === divisionId)?.bn_name,
+    district: districts.find(d => d.id === districtId)?.bn_name,
+    upazila: selectedUpazilla.bn_name
+  });
+}
+
             setUnionId('');
             setUnions([]);
           }}
         >
-          <option value="">Select Upazila</option>
+          <option value="">উপজেলা নির্বাচন করুন</option>
           {upazilas.map((upz) => (
             <option key={upz.id} value={upz.id}>{upz.bn_name}</option>
           ))}
@@ -496,40 +513,46 @@ export default function Dropdown({setLocation} : DropdownProp) {
       {/* Union */}
       {unions.length > 0 && (
         <select
-          className="w-full border p-2 rounded"
+          className="w-full border border-slate-400 outline-0 p-2 rounded bg-slate-800"
           value={unionId}
           onChange={(e) => {
               const selectedId = e.target.value;
     setUnionId(selectedId);
 
-    const selectedUnion = unions.find(div => div.id === selectedId);
-    if (selectedUnion) {
-      setLocation(selectedUnion.bn_name);
-    }
+   const selectedUnion = unions.find(u => u.id === selectedId);
+if (selectedUnion) {
+  setLocation({
+    division: divisions.find(d => d.id === divisionId)?.bn_name,
+    district: districts.find(d => d.id === districtId)?.bn_name,
+    upazila: upazilas.find(u => u.id === upazilaId)?.bn_name,
+    union: selectedUnion.bn_name
+  });
+}
+
           }}
         >
-          <option value="">Select Union</option>
+          <option value="">ইউনিয়ন নির্বাচন করুন</option>
           {unions.map((uni) => (
             <option key={uni.id} value={uni.id}>{uni.bn_name}</option>
           ))}
         </select>
       )}
-      <div className='pb-5  my-0 text-center w-full'>OR</div>
+      <div className='pb-5  my-0 text-center w-full'><span className='tracking-[-2]'>------</span> অথবা <span className='tracking-[-2]'>------</span></div>
 
 
        <select
-        className="w-full border p-2 rounded"
+        className="w-full border border-slate-400 outline-0 p-2 rounded bg-slate-800"
         value={universityId}
         onChange={(e) => {
             const selectedId = e.target.value;
     
           setUniversityId(e.target.value);
 
-    const selectedUni = universities.find(div => div.id === selectedId);
-    if (selectedUni) {
-      setLocation(selectedUni.bn_name);
+    const selectedUni = universities.find(uni => uni.id === selectedId);
+if (selectedUni) {
+  setLocation({ university: selectedUni});
+}
 
-    }
     setDivisionId('')
        setDistrictId('');
           setUpazilaId('');
@@ -539,7 +562,7 @@ export default function Dropdown({setLocation} : DropdownProp) {
           setUnions([]);
         }}
       >
-        <option value="">Select University</option>
+        <option value="">ইউনিভার্সিটি নির্বাচন করুন</option>
          {universities.map((varsity) => (
             <option key={varsity.id} value={varsity.id}>{varsity.bn_name}</option>
           ))}

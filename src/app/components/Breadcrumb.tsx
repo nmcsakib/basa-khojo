@@ -25,24 +25,24 @@ const Breadcrumb = () => {
     return (
         <div className="flex flex-col">
         
-            <ol className="flex items-center gap-[5px] bg-[#e6a8ff77] py-5 px-3 rounded-md">
+            <div className="flex flex-wrap items-center gap-2 bg-white/80 py-5 px-3 rounded-md">
                 {
                     breadcrumbItems?.map((item, index) => (
-                        <>
-                            <li key={index}
-                                className={`text-[0.9rem] text-yellow-700 ${index === breadcrumbItems.length - 1 && "font-bold"}`}>{item.label}</li>
+                        <ol  key={index} className="flex items-center">
+                            <li
+                                className={` text-yellow-700 ${index === breadcrumbItems.length - 1 && "font-bold"}`}>{item.label}</li>
                             {
                                 index !== breadcrumbItems.length - 1 && (
                                     <MdKeyboardArrowDown
                                         className="rotate-[-90deg] text-green-900 text-3xl font-bold"/>
                                 )
                             }
-                        </>
+                        </ol>
                     ))
                 }
-            </ol>
-            <div className="flex items-center gap-[5px] bg-[#e6a8ff77] py-5 px-3 rounded-md mt-2">
-            <h4 className="text-xl">Near : <span className="text-red-500">Mawlana Bhasani Science and Technology University</span></h4>
+            </div>
+            <div className="flex items-center gap-[5px] bg-[#fffea877] py-5 px-3 rounded-md mt-2">
+            <h4 className="text-xl">Near : <span className="text-indigo-800">Mawlana Bhasani Science and Technology University</span></h4>
             </div>
         </div>
     );

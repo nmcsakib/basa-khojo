@@ -7,12 +7,12 @@ import { usePathname } from 'next/navigation';
 const SideBar = () => {
     const pathname = usePathname()
     const menuItems = [
-        { name: 'Add Product', path: '/seller', icon: "/add_icon.png" },
-        { name: 'Product List', path: '/seller/product-list', icon: "/product_list_icon.svg" }
+        { name: 'Add Post', path: '/landlord', icon: "/add_icon.png" },
+        { name: 'Posts', path: '/landlord/houses', icon: "/product_list_icon.svg" }
     ];
 
     return (
-        <div className='md:w-64 w-16 border-r min-h-screen text-base border-gray-300 py-2 flex flex-col'>
+        <div className='md:w-64 w-[64px] border-r min-h-screen text-base border-gray-300 py-2 flex flex-col'>
             {menuItems.map((item) => {
 
                 const isActive = pathname === item.path;
