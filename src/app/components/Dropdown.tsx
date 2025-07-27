@@ -20,9 +20,10 @@ interface DropdownProp {
     "district": string
     };
   }) => void;
+  uni: boolean
 }
 
-export default function Dropdown({setLocation} : DropdownProp) {
+export default function Dropdown({setLocation, uni} : DropdownProp) {
     const [divisions, setDivisions] = useState<Location[]>([]);
     const [divisionId, setDivisionId] = useState('');
     const [districts, setDistricts] = useState<Location[]>([]);
@@ -537,7 +538,10 @@ if (selectedUnion) {
           ))}
         </select>
       )}
-      <div className='pb-5  my-0 text-center w-full'><span className='tracking-[-2]'>------</span> অথবা <span className='tracking-[-2]'>------</span></div>
+
+      {
+        uni &&  <div>
+        <div className='pb-5  my-0 text-center w-full'><span className='tracking-[-2]'>------</span> অথবা <span className='tracking-[-2]'>------</span></div>
 
 
        <select
@@ -567,6 +571,9 @@ if (selectedUni) {
             <option key={varsity.id} value={varsity.id}>{varsity.bn_name}</option>
           ))}
       </select>
+      </div>
+      }
+     
     </div>
     );
 }

@@ -43,21 +43,21 @@ const ProductCard = ({ post }: Post) => {
                 <div className="flex flex-col gap-4 ">
                     <div>
 
-                        <p className="text-[#e0e0e0] text-[0.9rem]">
-                            Rent : {post.rent}
+                        <p className="text-[#e0e0e0] text-lg tracking-wider">
+                            ভাড়া: {post.rent} টাকা
                         </p>{" "}
 
-                        <p className="text-[#e0e0e0] text-[0.9rem]">
-                            Available : {post.availableRooms}
+                        <p className="text-[#e0e0e0] text-md tracking-wider">
+                            সিট বাকি: {post.availableRooms}
                         </p>{" "}
                     </div>
                     <div className="text-lg text-yellow-500 font-bold">
                         <span className="text-xs text-gray-400">Last Update:</span> <br /> August, 2025
                     </div>
                 </div>
-                <Link href="/basa/123"
+                <Link href={`/basa/${post._id}`}
                     className=" btn p-3 rounded backdrop-blur-3xl border border-slate-300 text-white hover:bg-blue-400/20 hover:text-white shadow-2xl">
-                    View Details
+                    বিস্তারিত দেখুন
                 </Link>
             </div>
         </div>

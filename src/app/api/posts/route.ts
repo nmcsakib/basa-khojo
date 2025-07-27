@@ -3,8 +3,8 @@ import { OptionalId, Document } from "mongodb";
 
 export async function GET() {
     
-    const users = await (await dbConnect(collectionsObj.posts)).find().toArray();
-    return Response.json(users)
+    const posts = await (await dbConnect(collectionsObj.posts)).find().toArray();
+    return Response.json(posts)
 
 }
 

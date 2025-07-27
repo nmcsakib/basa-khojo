@@ -21,7 +21,6 @@
 
 body {
   margin: 0;
-  min-height: 100vh;
   background-color: #001922;
  /* background: linear-gradient(90deg,rgba(217, 156, 255, 1) 33%, rgba(133, 235, 255, 1) 100%); */
   background-image: 
@@ -45,4 +44,14 @@ cursor: pointer;
     background: #ffffff;
 background: linear-gradient(90deg,rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.486) 51%);
 cursor: pointer;
+}
+
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, Opera */
 }

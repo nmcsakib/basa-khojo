@@ -8,7 +8,7 @@ const Layout = ({
 }>) => {
   return (
     <div>
-      <div className='flex w-full'>
+      <div className='flex w-full overflow-y-hidden h-[calc(100vh-56px)]'>
         <SideBar />
         {children}
       </div>

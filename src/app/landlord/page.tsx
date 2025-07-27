@@ -25,6 +25,7 @@ const AddPost = () => {
   const [loadingStates, setLoadingStates] = useState<boolean[]>([false, false, false, false]);
 
   const [title, setTitle] = useState('');
+  const [gender, setGender] = useState('');
   const [mobile, setMobile] = useState('');
   const [facebook, setFacebook] = useState('');
   const [rent, setRent] = useState('');
@@ -33,6 +34,8 @@ const AddPost = () => {
   const [balcony, setBalcony] = useState('');
   const [kitchen, setKitchen] = useState('');
   const [location, setLocation] = useState<LocationObject>({});
+  const [accLoc, setAccLoc] = useState('');
+  const [wifi, setWifi] = useState('');
   const isAnyUploading = loadingStates.some(Boolean);
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const file = e.target.files?.[0] || null;
@@ -65,7 +68,9 @@ const AddPost = () => {
 
     const payload = {
       title,
+      gender,
       location,
+      accLoc,
       mobile,
       facebook,
       rent,
@@ -73,6 +78,7 @@ const AddPost = () => {
       description,
       balcony,
       kitchen,
+      wifi,
       images: uploadedLinks.filter(Boolean),
     };
 
@@ -100,10 +106,10 @@ const AddPost = () => {
   };
 
   return (
-    <div className="flex-1 min-h-screen flex flex-col justify-between">
-      <form onSubmit={handleSubmit} className="md:p-10 p-4 space-y-5 max-w-lg">
+    <div className="flex-1 flex flex-col justify-between text-white myFont backdrop-blur-xs overflow-y-scroll scrollbar-hide">
+      <form onSubmit={handleSubmit} className="md:p-10 p-4 space-y-5 max-w-lg ">
         <div>
-          <p className="text-base font-medium">Room Images (1st one is Thumbnail)</p>
+          <p className="font-medium">রুমের ছবি (প্রথমটি থাম্বনেইল এ বসবে)</p>
           <div className={`flex flex-wrap items-center gap-3 mt-2`}>
             {[...Array(4)].map((_, index) => (
               <label
@@ -141,15 +147,26 @@ const AddPost = () => {
           </div>
         </div>
 
-        <RoomInput label="Title" type="text" placeholder="Sublet Rent" setValue={setTitle} />
-        <label className="text-base font-medium">Location</label>
-        <Dropdown setLocation={setLocation} />
-
+        <RoomInput label="টাইটেল" type="text" placeholder="Sublet Rent" setValue={setTitle} />
+        <label className="text-base font-medium">লোকেশান নির্বাচন করুন</label>
+        <Dropdown uni={false} setLocation={setLocation} />
+        <RoomInput label="একুরেট লোকেশন" type="text" placeholder="বিস্তারিত লোকেশন" setValue={setAccLoc} />
+          <select   onChange={(e) => {
+    const selectedItem = e.target.value;
+    setGender(selectedItem);
+          }}
+          required
+        className="w-full border border-slate-400 outline-0 p-2 rounded bg-slate-800"
+      >
+        <option value="">কাদের জন্য ভাড়া দিতে চান?</option>
+        <option value="ছেলে">ছেলে</option>
+        <option label="মেয়ে" value={"মেয়ে"}>মেয়ে</option>
+      </select>
         <div className="flex flex-col gap-1 max-w-md">
-          <label className="text-base font-medium">Subidha Description</label>
+          <label className="text-base font-medium">সুবিধা সমূহ </label>
           <textarea
             rows={4}
-            className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40 resize-none"
+            className="outline-none md:py-2.5 py-2 px-3 rounded border border-white resize-none"
             placeholder="Type here"
             onChange={(e) => setDescription(e.target.value)}
             value={description}
@@ -160,10 +177,11 @@ const AddPost = () => {
         <div className="flex items-center gap-5 flex-wrap">
           <RoomInput label="Mobile Number" type="number" placeholder="+8801XXXXXX" setValue={setMobile} />
           <RoomInput label="Facebook ID" type="text" placeholder="https://facebook.com" setValue={setFacebook} />
-          <RoomInput label="Rent" type="number" placeholder="0" setValue={setRent} />
-          <RoomInput label="Available Rooms" type="number" placeholder="0" setValue={setAvailableRooms} />
-          <RoomInput label="Balcony" type="number" placeholder="0" setValue={setBalcony} />
-          <RoomInput label="Kitchen" type="number" placeholder="0" setValue={setKitchen} />
+          <RoomInput label="সিট বাকি" type="number" placeholder="0" setValue={setAvailableRooms} />
+          <RoomInput label="ভাড়া " type="number" placeholder="0" setValue={setRent} />
+          <RoomInput label="বারান্দা" type="number" placeholder="0" setValue={setBalcony} />
+          <RoomInput label="কিচেন" type="number" placeholder="0" setValue={setKitchen} />
+          <RoomInput label="ওয়াইফাই" type="text" placeholder="Yes/No" setValue={setWifi} />
         </div>
 
         <button

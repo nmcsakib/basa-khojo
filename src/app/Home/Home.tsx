@@ -50,9 +50,9 @@ console.log(posts);
           <Modal setRole={setRole}/>
              <main className="max-w-[1600px] mx-auto py-5">
          <h1 className="text-2xl font-bold mb-6 text-center text-slate-200 myFont tracking-widest">লোকেশান নির্বাচন করুন:</h1>
-      <Dropdown setLocation={setLocation} />
+      <Dropdown uni={true} setLocation={setLocation} />
          <div className="w-full rounded-t-lg min-h-screen md:p-5">
-       { (location.division || location.university) && <h2 className="text-2xl md:text-3xl p-5 text-slate-200 myFont tracking-widest"><span className="text-red-400">{location.union || location.upazila || location.district || location.division || location.university?.bn_name}</span> এরিয়াতে বাসা খুজুন: </h2>}
+       { (location.division || location.university) && <h2 className="text-2xl md:text-3xl p-5 text-slate-200 myFont tracking-widest"><span className="text-red-400">{location.union || location.upazila || location.district || location.division || location.university?.bn_name}</span> এরিয়াতে বাসা/মেস খুজুন: </h2>}
      
       <div className="grid md:grid-cols-3 lg:grid-cols-4 w-full gap-7">
         {
