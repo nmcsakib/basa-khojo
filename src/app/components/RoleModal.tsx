@@ -9,9 +9,7 @@ const Modal = ({setRole} : {setRole: Dispatch<SetStateAction<"" | "male" | "fema
     const [isModalOpen, setIsModalOpen] = useState(true);
     const [publishButtonActive, setPublishButtonActive] = useState(false);
 
-    const publishButtonContent = [
-        "male", "female"
-    ]
+    const publishButtonContent: ("male" | "female")[] = [ "male", "female" ]
 
    useEffect(() => {
   const handleClick = (event: MouseEvent) => {

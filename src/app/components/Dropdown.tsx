@@ -429,6 +429,7 @@ export default function Dropdown({setLocation, uni} : DropdownProp) {
       <select
         className="w-full border border-slate-400 outline-0 p-2 rounded bg-slate-800"
         value={divisionId}
+        required
        onChange={(e) => {
     const selectedId = e.target.value;
     setDivisionId(selectedId);
@@ -457,6 +458,7 @@ if (selectedDivision) {
         <select
           className="w-full border p-2 rounded bg-slate-800 border-slate-400 outline-0"
           value={districtId}
+          required
           onChange={(e) => {
               const selectedId = e.target.value;
     setDistrictId(selectedId);

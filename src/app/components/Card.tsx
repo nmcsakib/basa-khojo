@@ -20,7 +20,7 @@ interface Post {
 const ProductCard = ({ post }: Post) => {
 
     return (
-        <div className="md:w-full w-11/12 mx-auto border border-cyan-600 shadow-xl backdrop-blur-xs rounded-2xl relative">
+        <div className="md:w-full w-11/12 mx-auto border border-cyan-600 bg-white/10 shadow-xl backdrop-blur-xs rounded-2xl relative">
             <Image width={200} height={200}
                 src={post.images[2] || post.images[0] || post.images[2] || post.images[3] }
                 alt=""
@@ -56,7 +56,7 @@ const ProductCard = ({ post }: Post) => {
                     </div>
                 </div>
                 <Link href={`/basa/${post._id}`}
-                    className=" btn p-3 rounded backdrop-blur-3xl border border-slate-300 text-white hover:bg-blue-400/20 hover:text-white shadow-2xl">
+                    className=" btn p-3 rounded backdrop-blur-3xl border border-slate-300 text-white bg-blue-400/20 hover:bg-transparent hover:text-white shadow-2xl">
                     বিস্তারিত দেখুন
                 </Link>
             </div>

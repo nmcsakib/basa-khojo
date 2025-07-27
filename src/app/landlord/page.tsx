@@ -9,14 +9,6 @@ interface LocationObject {
   district?: string;
   upazila?: string;
   union?: string;
-  university?: {
-
-    "id": string,
-    "bn_name": string,
-    "en_name": string,
-    "short_form": string,
-    "district": string
-  };
 }
 
 const AddPost = () => {
@@ -26,7 +18,8 @@ const AddPost = () => {
 
   const [title, setTitle] = useState('');
   const [gender, setGender] = useState('');
-  const [mobile, setMobile] = useState('');
+  const [mobile1, setMobile1] = useState('');
+  const [mobile2, setMobile2] = useState('');
   const [facebook, setFacebook] = useState('');
   const [rent, setRent] = useState('');
   const [availableRooms, setAvailableRooms] = useState('');
@@ -58,7 +51,6 @@ const AddPost = () => {
       updatedLinks[index] = url;
       setUploadedLinks(updatedLinks);
 
-      // ✅ Clear local file to prioritize showing uploaded link
       const updatedFilesAfterUpload = [...files];
       updatedFilesAfterUpload[index] = null;
       setFiles(updatedFilesAfterUpload);
@@ -85,7 +77,7 @@ const AddPost = () => {
       gender,
       location,
       accLoc,
-      mobile,
+      contacts: [mobile1, mobile2],
       facebook,
       rent,
       availableRooms,
@@ -186,7 +178,8 @@ const AddPost = () => {
         </div>
 
         <div className="flex items-center gap-5 flex-wrap">
-          <RoomInput label="Mobile Number" type="number" placeholder="+8801XXXXXX" setValue={setMobile} />
+          <RoomInput label="Mobile Number 1" type="number" placeholder="+8801XXXXXX" setValue={setMobile1} />
+          <RoomInput label="Mobile Number 2 (Optional)" type="number" placeholder="+8801XXXXXX" setValue={setMobile2} />
           <RoomInput label="Facebook ID" type="text" placeholder="https://facebook.com" setValue={setFacebook} />
           <RoomInput label="সিট বাকি" type="number" placeholder="0" setValue={setAvailableRooms} />
           <RoomInput label="ভাড়া " type="number" placeholder="0" setValue={setRent} />

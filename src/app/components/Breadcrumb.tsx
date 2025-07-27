@@ -22,7 +22,7 @@ const Breadcrumb = ({location}: {location: LocationObject}) => {
     return (
         <div className="flex flex-col">
         
-            <div className="flex flex-wrap items-center gap-2 bg-white/80 py-5 px-3 rounded-md">
+          {location?.division &&   <div className="flex flex-wrap items-center gap-2 bg-white/80 py-5 px-3 rounded-md">
                
                   
                         <ol className="flex items-center flex-wrap md:text-xl">
@@ -36,7 +36,7 @@ const Breadcrumb = ({location}: {location: LocationObject}) => {
                              
                         </ol>
                  
-            </div>
+            </div>}
             {
                 location?.university && <div className="flex items-center gap-[5px] bg-[#fffea877] py-5 px-3 rounded-md mt-2">
             <h4 className="text-xl">বিশ্ববিদ্যালয়: <span className="text-indigo-800">{location?.university?.bn_name}</span></h4>
