@@ -5,12 +5,12 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import Link from "next/link";
 
-const Modal = ({setRole} : {setRole: Dispatch<SetStateAction<boolean>>}) => {
+const Modal = ({setRole} : {setRole: Dispatch<SetStateAction<"" | "male" | "female">>}) => {
     const [isModalOpen, setIsModalOpen] = useState(true);
     const [publishButtonActive, setPublishButtonActive] = useState(false);
 
     const publishButtonContent = [
-        "ছাত্র", "ছাত্রী"
+        "male", "female"
     ]
 
    useEffect(() => {
@@ -72,10 +72,10 @@ const Modal = ({setRole} : {setRole: Dispatch<SetStateAction<boolean>>}) => {
                                     publishButtonContent?.map((item, index) => (
                                         <li className="py-2 px-6 hover:bg-blue-700 bg-blue-400 text-white cursor-pointer w-full border-b rounded text-xl"
                                             key={index} onClick={() => {
-                                                 setRole(true)
+                                                 setRole(item)
                                                 setIsModalOpen(false)
                                             }
-                                            }>{item}</li>
+                                            }>{item === "male" ? "ছাত্র" : "ছাত্রী"}</li>
                                     ))
                                 }
                             </ul>

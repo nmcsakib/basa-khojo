@@ -1,9 +1,15 @@
 import { collectionsObj, dbConnect } from "@/app/lib/mongodb";
 import { OptionalId, Document } from "mongodb";
+import { NextRequest } from "next/server";
 
-export async function GET() {
-    
-    const posts = await (await dbConnect(collectionsObj.posts)).find().toArray();
+export async function GET(req: NextRequest, res: unknown) {
+    const url = new URL(req?.url)
+    const gender = url.search.split("=")[1]
+    const matchStage = gender ? { gender } : {};
+    console.log(gender);
+    const posts = await (await dbConnect(collectionsObj.posts)).aggregate([
+        {$match : matchStage}
+    ]).toArray();
     return Response.json(posts)
 
 }

@@ -10,13 +10,13 @@ interface LocationObject {
   upazila?: string;
   union?: string;
   university?: {
-    
+
     "id": string,
     "bn_name": string,
     "en_name": string,
     "short_form": string,
     "district": string
-    };
+  };
 }
 
 const AddPost = () => {
@@ -37,6 +37,7 @@ const AddPost = () => {
   const [accLoc, setAccLoc] = useState('');
   const [wifi, setWifi] = useState('');
   const isAnyUploading = loadingStates.some(Boolean);
+
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const file = e.target.files?.[0] || null;
     if (!file) return;
@@ -56,12 +57,25 @@ const AddPost = () => {
       const updatedLinks = [...uploadedLinks];
       updatedLinks[index] = url;
       setUploadedLinks(updatedLinks);
+
+      // ✅ Clear local file to prioritize showing uploaded link
+      const updatedFilesAfterUpload = [...files];
+      updatedFilesAfterUpload[index] = null;
+      setFiles(updatedFilesAfterUpload);
     }
 
     // Hide loading state
     newLoading[index] = false;
     setLoadingStates([...newLoading]);
   };
+
+  const getPreview = (index: number) => {
+    if (uploadedLinks[index]) return uploadedLinks[index]!;
+    if (files[index]) return URL.createObjectURL(files[index]!);
+    return "/upload_area.png";
+  };
+
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -86,17 +100,17 @@ const AddPost = () => {
     try {
       const res = await fetch(`/api/posts`, {
         method: "POST",
-        headers:{
+        headers: {
           "content-type": "application/json",
-          },
-          body: JSON.stringify(payload)
+        },
+        body: JSON.stringify(payload)
 
       })
       const result = await res.json()
-      if(result.acknowledged){
+      if (result.acknowledged) {
         console.log("success");
         console.log("Server response:", result);
-      }else{
+      } else {
         console.log("failed");
       }
 
@@ -113,12 +127,12 @@ const AddPost = () => {
           <div className={`flex flex-wrap items-center gap-3 mt-2`}>
             {[...Array(4)].map((_, index) => (
               <label
-  key={index}
-  htmlFor={`image${index}`}
-  className={`relative ${isAnyUploading ? 'pointer-events-none opacity-50' : ''}`}
+                key={index}
+                htmlFor={`image${index}`}
+                className={`relative ${isAnyUploading ? 'pointer-events-none opacity-50' : ''}`}
 
 
->
+              >
                 <input
                   type="file"
                   id={`image${index}`}
@@ -128,12 +142,9 @@ const AddPost = () => {
                 />
                 <div className="relative max-w-24 h-[100px] w-[100px] cursor-pointer border rounded overflow-hidden" >
                   <Image
-                    src={
-                      uploadedLinks[index] ||
-                      (files[index] ? URL.createObjectURL(files[index]!) : "/upload_area.png")
-                    }
+                    src={getPreview(index)}
                     alt="upload"
-                    fill                  
+                    fill
                     className="object-cover"
                   />
                   {loadingStates[index] && (
@@ -151,17 +162,17 @@ const AddPost = () => {
         <label className="text-base font-medium">লোকেশান নির্বাচন করুন</label>
         <Dropdown uni={false} setLocation={setLocation} />
         <RoomInput label="একুরেট লোকেশন" type="text" placeholder="বিস্তারিত লোকেশন" setValue={setAccLoc} />
-          <select   onChange={(e) => {
-    const selectedItem = e.target.value;
-    setGender(selectedItem);
-          }}
+        <select onChange={(e) => {
+          const selectedItem = e.target.value;
+          setGender(selectedItem);
+        }}
           required
-        className="w-full border border-slate-400 outline-0 p-2 rounded bg-slate-800"
-      >
-        <option value="">কাদের জন্য ভাড়া দিতে চান?</option>
-        <option value="ছেলে">ছেলে</option>
-        <option label="মেয়ে" value={"মেয়ে"}>মেয়ে</option>
-      </select>
+          className="w-full border border-slate-200 outline-0 p-2 rounded bg-slate-800"
+        >
+          <option value="">কাদের জন্য ভাড়া দিতে চান?</option>
+          <option value="male">ছেলে</option>
+          <option value="female">মেয়ে</option>
+        </select>
         <div className="flex flex-col gap-1 max-w-md">
           <label className="text-base font-medium">সুবিধা সমূহ </label>
           <textarea

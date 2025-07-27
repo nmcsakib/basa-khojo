@@ -2,6 +2,7 @@
 
 import Breadcrumb from "@/app/components/Breadcrumb";
 import Image from "next/image";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BiStar } from "react-icons/bi";
@@ -85,18 +86,20 @@ const [basa, setBasa] = useState<BasaProp>();
                 </div>
 
                 <div className="flex flex-col text-white">
-                    <h1 className="text-3xl font-medium text-white mb-4">
+                    <h1 className="text-3xl font-medium text-white mb-1 myFont tracking-wider">
                         {basa?.title}
                     </h1>
-                    <div className="flex items-center gap-2">
+                    <span className="text-green-400">{basa?.accLoc}</span>
+                    <div className="flex items-center gap-2 pt-3">
                         <div className="flex items-center gap-0.5">
+                           <BiStar className="text-amber-400"/>
                            <BiStar className="text-amber-400"/>
                            <BiStar className="text-amber-400"/>
                            <BiStar className="text-amber-400"/>
                            <BiStar className="text-amber-400"/>
                            
                         </div>
-                        <p>(4.5)</p>
+                        <p></p>
                     </div>
                     <p className="text-red-400 animate-pulse text-xl mt-3">
                        সিট বাকি: {basa?.availableRooms} 
@@ -107,15 +110,15 @@ const [basa, setBasa] = useState<BasaProp>();
                     <p className="text-3xl font-medium mt-6">
                         ভাড়া: {basa?.rent} টাকা 
                     </p>
-                       <div className="flex flex-col md:flex-row gap-7 py-6">
+                       <div className="flex flex-col md:flex-row gap-7 py-6 font-sans font-bold">
                           <button
                 className="px-6 py-2 flex justify-center items-center gap-2 border border-[#06aa97] bg-[#06aa97] text-[#fff] hover:bg-white hover:text-[#06aa97] dark:hover:bg-transparent transition duration-300 rounded ">
                 <BsWhatsapp/> Contact Number
             </button>
-            <button
+            <Link href={`${basa?.facebook}`} target="_blank"
                 className="px-6 py-2 border border-[#3B9DF8] bg-[#3B9DF8] text-white hover:bg-transparent transition duration-300 rounded flex justify-center items-center gap-2">
                <FaFacebook/> Facebook ID
-            </button>
+            </Link>
                        </div>
                      <h2 className="text-3xl font-medium">বিস্তারিত:</h2>
                     <div className="overflow-x-auto pt-3 pb-6">

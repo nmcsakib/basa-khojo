@@ -34,12 +34,12 @@ interface Post {
 const Home = () => {
 
 const [location, setLocation] = useState<LocationObject>({})
-const [role, setRole] = useState<boolean>(false)
+const [role, setRole] = useState<"" | "male" | "female">('')
 const [posts, setPosts] = useState([])
 
 useEffect(() => {
   if(!role) return
- fetch(`/api/posts`)
+ fetch(`/api/posts?gender=${role}`)
  .then(res => res.json())
  .then(data => setPosts(data));
 
