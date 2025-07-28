@@ -9,6 +9,7 @@ const RoomInput = ({label, type, placeholder, setValue} : {label: string, type: 
             <input
             onChange={(e) => setValue(e.target.value)}
               type={type}
+              maxLength={40}
               placeholder={placeholder}
               className="outline-none md:py-2.5 py-2 px-3 rounded border text-white border-white"
               required

@@ -20,7 +20,7 @@ interface LocationObject {
 const Breadcrumb = ({location}: {location: LocationObject}) => {
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col mt-2">
         
           {location?.division &&   <div className="flex flex-wrap items-center gap-2 bg-white/80 py-5 px-3 rounded-md">
                

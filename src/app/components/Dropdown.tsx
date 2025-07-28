@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 interface Location {
     id: string
     bn_name: string
+    name: string
 }
 
 interface DropdownProp {
@@ -11,6 +12,10 @@ interface DropdownProp {
     district?: string;
     upazila?: string;
     union?: string;
+    div_en?: string
+    dis_en?: string
+    upa_en?: string
+    uni_en?: string
     university?: {
     
     "id": string,
@@ -436,7 +441,7 @@ export default function Dropdown({setLocation, uni} : DropdownProp) {
 
    const selectedDivision = divisions.find(div => div.id === selectedId);
 if (selectedDivision) {
-  setLocation({ division: selectedDivision.bn_name });
+  setLocation({ division: selectedDivision.bn_name, div_en: selectedDivision.name });
 }
     setUniversityId('')
           setDistrictId('');
@@ -467,7 +472,9 @@ if (selectedDivision) {
 if (selectedDistrict) {
   setLocation({ 
     division: divisions.find(d => d.id === divisionId)?.bn_name,
-    district: selectedDistrict.bn_name 
+    district: selectedDistrict.bn_name,
+    div_en:divisions.find(d => d.id === divisionId)?.name,
+    dis_en: selectedDistrict.name
   });
 }
 
@@ -498,7 +505,10 @@ if (selectedUpazilla) {
   setLocation({
     division: divisions.find(d => d.id === divisionId)?.bn_name,
     district: districts.find(d => d.id === districtId)?.bn_name,
-    upazila: selectedUpazilla.bn_name
+    upazila: selectedUpazilla.bn_name,
+    div_en:divisions.find(d => d.id === divisionId)?.name,
+    dis_en:  districts.find(d => d.id === districtId)?.name,
+    upa_en: selectedUpazilla.name
   });
 }
 
@@ -528,7 +538,11 @@ if (selectedUnion) {
     division: divisions.find(d => d.id === divisionId)?.bn_name,
     district: districts.find(d => d.id === districtId)?.bn_name,
     upazila: upazilas.find(u => u.id === upazilaId)?.bn_name,
-    union: selectedUnion.bn_name
+    union: selectedUnion.bn_name,
+    div_en:divisions.find(d => d.id === divisionId)?.name,
+    dis_en:  districts.find(d => d.id === districtId)?.name,
+    upa_en: upazilas.find(u => u.id === upazilaId)?.name,
+    uni_en: selectedUnion.name,
   });
 }
 

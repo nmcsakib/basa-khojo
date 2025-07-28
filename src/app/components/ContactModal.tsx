@@ -32,7 +32,7 @@ const ContactModal = ({contacts}: {contacts: string[]}) => {
       <div
         className={`${
           isModalOpen ? "scale-100 opacity-100" : "scale-0 opacity-0"
-        } w-[90%] sm:w-[80%] md:w-[30%] bg-black/70  backdrop-blur-2xl border border-pink-300 rounded-lg p-6 transition-all duration-300 text-xl relative`}
+        } w-[90%] sm:w-[80%] md:w-[30%] bg-slate-900/95  backdrop-blur-3xl border border-pink-300 rounded-lg p-6 transition-all duration-300 text-xl relative`}
       >
         {/* Close Button */}
         <button

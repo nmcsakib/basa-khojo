@@ -5,9 +5,24 @@ import { OptionalId, Document } from "mongodb";
 // GET handler
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
-  const gender = url.searchParams.get("gender");
 
-  const matchStage = gender ? { gender } : {};
+  // Extract query params
+  const gender = url.searchParams.get("gender");
+  const division = url.searchParams.get("division");
+  const district = url.searchParams.get("district");
+  const upazila = url.searchParams.get("upazila");
+  const union = url.searchParams.get("union");
+
+  // Build dynamic filter object
+  const matchStage: Record<string, unknown> = {};
+
+  if (gender) matchStage.gender = gender;
+  if (division) matchStage["location.division"] = division;
+  if (district) matchStage["location.district"] = district;
+  if (upazila) matchStage["location.upazila"] = upazila;
+  if (union) matchStage["location.union"] = union;
+
+  // Connect and fetch filtered posts
   const posts = await (
     await dbConnect(collectionsObj.posts)
   )

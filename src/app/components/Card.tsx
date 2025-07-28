@@ -27,14 +27,14 @@ const ProductCard = ({ post }: Post) => {
                 className="w-full h-64 object-cover rounded-t-2xl"
             />
             <div
-                className="px-4 py-1 w-1/3 text-center absolute top-54 right-3  text-green-900 bg-green-300 rounded-full text-[0.9rem] font-[500]">
+                className="px-1 py-0.5 w-20 text-center absolute top-54 right-3  text-green-900 bg-green-300 rounded-full text-[0.9rem] font-[500] font-sans">
                 Recent
             </div>
             <div className="flex w-full justify-between items-center p-4">
                 <div className="flex  items-center gap-4">
                     <div className=" flex flex-col">
                         <h2 className="font-semibold text-2xl text-white">{post.title}</h2>
-                        <p className="text-sm text-green-400">{post.location?.division || post.location?.university?.district}</p>
+                        <p className=" text-green-400">{post.location?.division || post.location?.university?.district}</p>
                     </div>
                 </div>
             </div>

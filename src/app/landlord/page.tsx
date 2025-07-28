@@ -78,7 +78,7 @@ const AddPost = () => {
       location,
       accLoc,
       contacts: [mobile1, mobile2],
-      facebook,
+      facebook: facebook.split("www.")[1],
       rent,
       availableRooms,
       description,
@@ -135,7 +135,7 @@ const AddPost = () => {
                 <div className="relative max-w-24 h-[100px] w-[100px] cursor-pointer border rounded overflow-hidden" >
                   <Image
                     src={getPreview(index)}
-                    alt="upload"
+                    alt="upload successfull"
                     fill
                     className="object-cover"
                   />
@@ -150,7 +150,7 @@ const AddPost = () => {
           </div>
         </div>
 
-        <RoomInput label="টাইটেল" type="text" placeholder="Sublet Rent" setValue={setTitle} />
+        <RoomInput label="টাইটেল" type="text" placeholder="Sublet Rent (সর্বোচ্চ ৩০ অক্ষর এর মধ্যে)" setValue={setTitle} />
         <label className="text-base font-medium">লোকেশান নির্বাচন করুন</label>
         <Dropdown uni={false} setLocation={setLocation} />
         <RoomInput label="একুরেট লোকেশন" type="text" placeholder="বিস্তারিত লোকেশন" setValue={setAccLoc} />
