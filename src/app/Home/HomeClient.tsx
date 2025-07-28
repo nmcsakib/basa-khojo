@@ -116,7 +116,7 @@ useEffect(() => {
 
         <Dropdown uni={true} setLocation={setLocation} />
 
-        <div className="w-full rounded-t-lg min-h-screen p-5">
+        <div className="w-full min-h-screen p-5">
           {((location.division || location.university) && posts.length > 0) && (
             <h2 className="text-2xl md:text-3xl p-5 text-slate-200 myFont tracking-widest">
               <span className="text-red-400">

@@ -7,6 +7,7 @@ import { BiLeftArrow, BiStar } from "react-icons/bi";
 import { FaFacebook } from "react-icons/fa";
 import ContactModal from "@/app/components/ContactModal";
 import { usePathname, useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 interface LocationObject {
   division?: string;
@@ -16,6 +17,7 @@ interface LocationObject {
 }
 
 interface BasaProp {
+  _id: string;
   title: string;
   gender: string;
   location: LocationObject;
@@ -29,19 +31,28 @@ interface BasaProp {
   kitchen: string;
   wifi: string;
   images: string[];
+  lastUpdate: string;
+  approved: string;
 }
 
 export default function BasaClient({ basa }: { basa: BasaProp }) {
   const [mainImage, setMainImage] = useState(basa.images[0]);
-   const router = useRouter();
-     const pathname = usePathname();
+  const router = useRouter();
+  const pathname = usePathname();
+  const token = localStorage.getItem("token");
+  const date = new Date(basa?.lastUpdate);
+  const formattedDate = date?.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+const handleUpate = () => {
+  console.log(basa?._id);
+}
 
   useEffect(() => {
     window.gtag('config', 'G-G1BVNBHWZH', {
       page_path: pathname,
     });
   }, [pathname]);
-  
+  console.log(basa);
   return (
     <>
       <button
@@ -85,15 +96,11 @@ export default function BasaClient({ basa }: { basa: BasaProp }) {
               {basa.title}
             </h1>
             <span className="text-green-400">{basa.accLoc}</span>
-            <div className="flex items-center gap-2 pt-3">
-              {[...Array(5)].map((_, i) => (
-                <BiStar key={i} className="text-amber-400" />
-              ))}
-            </div>
+            
             <p className="text-red-400 animate-pulse text-xl mt-3">
               সিট বাকি: {basa.availableRooms}
             </p>
-            <p className="text-white text-xl mt-3">লাস্ট আপডেট: 20/07/2025</p>
+            <p className="text-yellow-300 text-xl mt-3 myFont ">লাস্ট আপডেট: {formattedDate}</p>
             <p className="text-3xl font-medium mt-6">ভাড়া: {basa.rent} টাকা</p>
             <div className="flex flex-col md:flex-row gap-7 py-6 font-sans font-bold">
               <ContactModal contacts={basa.contacts} />
@@ -117,6 +124,19 @@ export default function BasaClient({ basa }: { basa: BasaProp }) {
             </table>
             <h2 className="text-3xl font-medium">সুবিধা সমূহ:</h2>
             <p className="text-xl mt-3">{basa.description}</p>
+
+            {
+              (token === "admin" && basa?.approved !== "approved") &&  <div className="flex justify-end items-center gap-6">
+              <button onClick={ handleUpate } className="cursor-pointer px-6 py-3 border border-[#06aa97] bg-[#06aa97] text-[#fff] hover:bg-white hover:text-[#06aa97] dark:hover:bg-transparent transition duration-300 rounded ">
+                            Approve
+                        </button>
+                        <button className="cursor-pointer px-6 py-3 border border-[#ff7b9c] bg-[#ff7b9c] text-[#fff] hover:bg-white hover:text-[#ff7b9c] dark:hover:bg-transparent transition duration-300 rounded ">
+                            Delete
+                        </button>
+              </div>
+              
+            }
+            { token === "admin" && (basa?.approved || "approved")}
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Dropdown from "../components/Dropdown";
 import RoomInput from "../components/RoomInput";
 import uploadToImgbb from "../lib/imagebb";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 interface LocationObject {
   division?: string;
@@ -32,6 +32,7 @@ const AddPost = () => {
   const [accLoc, setAccLoc] = useState('');
   const [wifi, setWifi] = useState('');
   const isAnyUploading = loadingStates.some(Boolean);
+  const router = useRouter()
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const file = e.target.files?.[0] || null;
@@ -73,14 +74,33 @@ const AddPost = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    toast.loading("অ্যাড করা হচ্ছে...")
+    let token = localStorage.getItem("bk_token");
+    if(!token){
+      const newToken = `${Math.ceil(Math.random()*999999) + Math.ceil(Math.random()*99999)}`;
+      localStorage.setItem("bk_token", newToken)
+      token = newToken
+
+      await fetch(`/api/landlords`, {
+         method: "POST",
+         headers: {
+           "content-type": "application/json",
+         },
+         body: JSON.stringify({token})
+ 
+       })
+    }
 
     const payload = {
+      approved: 'pending',
+      token,
+      lastUpdate: new Date(),
       title,
       gender,
       location,
       accLoc,
       contacts: [mobile1, mobile2],
-      facebook: facebook.split("www.")[1],
+      facebook: facebook.split("www.")[1] || "facebook.com",
       rent,
       availableRooms,
       description,
@@ -91,7 +111,6 @@ const AddPost = () => {
     };
 
     console.log("Submitting:", payload);
-    toast.loading("অ্যাড করা হচ্ছে...")
     try {
       const res = await fetch(`/api/posts`, {
         method: "POST",
@@ -106,7 +125,8 @@ const AddPost = () => {
         toast.dismiss()
         toast.success("পোস্টটি অ্যাড করা হয়েছে।")
         console.log("success");
-        console.log("Server response:", result);
+        // console.log("Server response:", result);
+        router.replace(`/landlord/houses?a=${token}`)
       } else {
         toast.dismiss()
         toast.error("দুঃখিত আবার চেষ্টা করুন। ")

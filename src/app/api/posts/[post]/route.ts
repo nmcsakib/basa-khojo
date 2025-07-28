@@ -29,8 +29,5 @@ export async function GET(
     });
   }
 
-  return new Response(JSON.stringify(postData), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
+  return new Response(JSON.stringify(postData), { status: 200, statusText: "success"});
 }

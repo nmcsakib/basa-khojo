@@ -12,6 +12,7 @@ interface LocationObject {
 }
 
 interface BasaProp {
+  _id: string;
   title: string;
   gender: string;
   location: LocationObject;
@@ -25,6 +26,8 @@ interface BasaProp {
   kitchen: string;
   wifi: string;
   images: string[];
+  lastUpdate: string;
+  approved: string;
 }
 
 

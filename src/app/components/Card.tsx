@@ -5,6 +5,7 @@ import Link from "next/link";
 interface Post {
     post: {
         _id: string;
+        approved?: string;
         title: string;
         images: string[];
         location: {
@@ -17,8 +18,8 @@ interface Post {
         availableRooms: string;
     }
 }
-const ProductCard = ({ post }: Post) => {
-
+const Card = ({ post }: Post,) => {
+    
     return (
         <div className="md:w-full w-11/12 mx-auto border border-cyan-600 bg-white/10 shadow-xl backdrop-blur-xs rounded-2xl relative">
             <Image width={200} height={200}
@@ -27,8 +28,8 @@ const ProductCard = ({ post }: Post) => {
                 className="w-full h-64 object-cover rounded-t-2xl"
             />
             <div
-                className="px-1 py-0.5 w-20 text-center absolute top-54 right-3  text-green-900 bg-green-300 rounded-full text-[0.9rem] font-[500] font-sans">
-                Recent
+                className={`${post?.approved === "pending" ? "bg-yellow-200 text-yellow-900" : "bg-green-300 w-20"} px-2 py-0.5 text-center absolute top-54 right-3  text-green-900 rounded-full text-[0.9rem] font-[500] font-sans`}>
+               {post?.approved === "pending" ? "পোস্ট পেন্ডিং আছে" : post?.approved === "approved" ? "Approved" : "Recent"}
             </div>
             <div className="flex w-full justify-between items-center p-4">
                 <div className="flex  items-center gap-4">
@@ -64,4 +65,4 @@ const ProductCard = ({ post }: Post) => {
     );
 };
 
-export default ProductCard;
+export default Card;
