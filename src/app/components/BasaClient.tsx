@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiLeftArrow, BiStar } from "react-icons/bi";
 import { FaFacebook } from "react-icons/fa";
 import ContactModal from "@/app/components/ContactModal";
+import { usePathname, useRouter } from "next/navigation";
 
 interface LocationObject {
   division?: string;
@@ -32,15 +33,23 @@ interface BasaProp {
 
 export default function BasaClient({ basa }: { basa: BasaProp }) {
   const [mainImage, setMainImage] = useState(basa.images[0]);
+   const router = useRouter();
+     const pathname = usePathname();
 
+  useEffect(() => {
+    window.gtag('config', 'G-G1BVNBHWZH', {
+      page_path: pathname,
+    });
+  }, [pathname]);
+  
   return (
     <>
-      <Link
-        href={`/`}
+      <button
+        onClick={() => router.back()}
         className="w-30 m-5 md:ml-14 px-6 py-2 border border-[#3B9DF8] bg-[#3B9DF8] text-white hover:bg-transparent transition duration-300 rounded flex justify-center items-center gap-2"
       >
         <BiLeftArrow /> Back
-      </Link>
+      </button>
 
       <div className="px-5 md:px-6 lg:px-8 pt-4 space-y-10 min-h-screen pb-10 backdrop-blur-xs w-11/12 mx-auto mb-10 rounded-2xl border border-cyan-300 bg-white/10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

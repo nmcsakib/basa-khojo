@@ -1,6 +1,6 @@
 // app/page.tsx or app/home/page.tsx depending on your route structure
-import HomeClient from "@/app/components/HomeClient";
 import { Metadata } from "next";
+import HomeServer from "./Home/HomeServer";
 
 export const metadata: Metadata = {
   title: "Basa Khojo | Homepage",
@@ -8,6 +8,6 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  
-  return <HomeClient />;
+
+  return <HomeServer />;
 }

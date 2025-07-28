@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import Dropdown from "./Dropdown";
-import Card from "./Card";
-import Modal from "./RoleModal";
+import Dropdown from "../components/Dropdown";
+import Card from "../components/Card";
+import Modal from "../components/RoleModal";
 
 interface LocationObject {
   division?: string;
@@ -44,6 +44,8 @@ export default function HomeClient() {
   const [showModal, setShowModal] = useState(true);
   const [loading, setLoading] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
+  const [hasRestored, setHasRestored] = useState(false);
+
 
   useEffect(() => {
     const savedRole = sessionStorage.getItem("userRole");
@@ -53,33 +55,50 @@ export default function HomeClient() {
     }
   }, []);
 
-  useEffect(() => {
-    if (!role) return;
-    sessionStorage.setItem("userRole", role);
+useEffect(() => {
+  const savedLocation = sessionStorage.getItem('locationFilters');
+  if (savedLocation) {
+    setLocation(JSON.parse(savedLocation));
+  }
+  setHasRestored(true);
+}, []);
 
-    const params = new URLSearchParams();
-    if (role) params.set("gender", role);
-    if (location.division) params.set("division", location.div_en!);
-    if (location.district) params.set("district", location.dis_en!);
-    if (location.upazila) params.set("upazila", location.upa_en!);
-    if (location.union) params.set("union", location.uni_en!);
-    if (location.university) params.set("district", location.university.district);
+useEffect(() => {
+  if (!hasRestored) return;
+  if (Object.keys(location).length === 0) return;
+  sessionStorage.setItem('locationFilters', JSON.stringify(location));
+}, [location, hasRestored]);
 
-    setLoading(true);
-    fetch(`/api/posts?${params.toString()}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-        setHasFetched(true);
-        setLoading(false);
-      })
-      .catch(() => {
-        setPosts([]);
-        setHasFetched(true);
-        setLoading(false);
-      });
-      console.log(location);
-  }, [ location, role]);
+// Fetch posts when location or role changes
+useEffect(() => {
+  if (!role) return;
+  sessionStorage.setItem("userRole", role);
+
+  const params = new URLSearchParams();
+  if (role) params.set("gender", role);
+  if (location.division) params.set("division", location.div_en!);
+  if (location.district) params.set("district", location.dis_en!);
+  if (location.upazila) params.set("upazila", location.upa_en!);
+  if (location.union) params.set("union", location.uni_en!);
+  if (location.university) params.set("district", location.university.district);
+
+  setLoading(true);
+  fetch(`/api/posts?${params.toString()}`)
+    .then((res) => res.json())
+    .then((data) => {
+      setPosts(data);
+      setHasFetched(true);
+      setLoading(false);
+    })
+    .catch(() => {
+      setPosts([]);
+      setHasFetched(true);
+      setLoading(false);
+    });
+}, [location, role]);
+
+
+ 
 
   return (
     <div>

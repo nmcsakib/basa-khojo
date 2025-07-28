@@ -1,0 +1,12 @@
+// app/HomeServer.tsx
+import { Suspense } from 'react';
+import HomeClient from './HomeClient';
+
+export default async function HomeServer() {
+
+  return (
+    <Suspense fallback={<div>লোড হচ্ছে...</div>}>
+      <HomeClient />
+    </Suspense>
+  );
+}

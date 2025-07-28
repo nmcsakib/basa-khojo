@@ -22,8 +22,8 @@ const ProductCard = ({ post }: Post) => {
     return (
         <div className="md:w-full w-11/12 mx-auto border border-cyan-600 bg-white/10 shadow-xl backdrop-blur-xs rounded-2xl relative">
             <Image width={200} height={200}
-                src={post.images[2] || post.images[0] || post.images[2] || post.images[3] }
-                alt=""
+                src={post.images[0] || post.images[1] || post.images[2] || post.images[3] || "/fallback.png"}
+                alt="Preview"
                 className="w-full h-64 object-cover rounded-t-2xl"
             />
             <div

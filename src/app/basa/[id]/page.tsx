@@ -2,6 +2,7 @@
 import { notFound } from 'next/navigation';
 import Breadcrumb from '@/app/components/Breadcrumb';
 import BasaClient from '@/app/components/BasaClient';
+import { Metadata } from 'next';
 
 interface LocationObject {
   division?: string;
@@ -26,16 +27,38 @@ interface BasaProp {
   images: string[];
 }
 
+
+async function fetchBasaById(id: string): Promise<BasaProp | null> {
+  try {
+    const res = await fetch(`${process.env.SERVER}/api/posts/${id}`, {
+      cache: 'force-cache',
+    });
+
+    if (!res.ok) return null;
+
+    const basa: BasaProp = await res.json();
+    return basa;
+  } catch (err) {
+    return null;
+  }
+}
+
+// Metadata with title
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const id = params.id;
+  const basa = await fetchBasaById(id);
+
+  return {
+    title: ` ${basa?.title ?? "Details"} | Basa Khojo`,
+  };
+}
+
 export default async function BasaPage({ params }: { params: { id: string } }) {
-  const {id} = await params;
-  const res = await fetch(`${process.env.SERVER}/api/posts/${id}`, {
-    cache: 'force-cache', 
-  });
+  const { id } = params;
+  const basa = await fetchBasaById(id);
 
-  if (!res.ok) return notFound();
+  if (!basa) return notFound();
 
-  const basa: BasaProp = await res.json();
-console.log(basa);
   return (
     <div className="px-4">
       <Breadcrumb location={basa.location} />

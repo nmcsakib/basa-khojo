@@ -17,10 +17,10 @@ export async function GET(req: NextRequest) {
   const matchStage: Record<string, unknown> = {};
 
   if (gender) matchStage.gender = gender;
-  if (division) matchStage["location.division"] = division;
-  if (district) matchStage["location.district"] = district;
-  if (upazila) matchStage["location.upazila"] = upazila;
-  if (union) matchStage["location.union"] = union;
+  if (division) matchStage["location.div_en"] = division;
+  if (district) matchStage["location.dis_en"] = district;
+  if (upazila) matchStage["location.upa_en"] = upazila;
+  if (union) matchStage["location.uni_en"] = union;
 
   // Connect and fetch filtered posts
   const posts = await (
