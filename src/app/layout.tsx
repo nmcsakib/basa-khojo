@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+   metadataBase: new URL('https://basa-khojo.vercel.app'),
   title: "Basa Khojo - Find Your Next Home",
   description: "Basa Khojo is your one-stop platform for finding rental homes in your desired area.",
   keywords: "rent, house, apartment, room, landlord, tenant, basa, khojo, home, find",
@@ -58,6 +59,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta property="fb:app_id" content="1750483335592151" />
+        <meta name="theme-color" content="#000000" />
         {/* Google Analytics Script */}
         <Script
           async

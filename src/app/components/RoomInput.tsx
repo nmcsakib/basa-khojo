@@ -3,7 +3,7 @@ import React from 'react';
 const RoomInput = ({label, type, placeholder, setValue} : {label: string, type: string, placeholder: string, setValue:  React.Dispatch<React.SetStateAction<string>>}) => {
     return (
          <div className="flex flex-col gap-1 text-white">
-            <label className="text-base font-medium" htmlFor="offer-price">
+            <label className="font-medium tracking-wider" htmlFor="offer-price">
             {label}
             </label>
             <input

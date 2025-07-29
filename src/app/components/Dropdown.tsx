@@ -6,28 +6,6 @@ interface Location {
     name: string
 }
 
-interface DropdownProp {
-  setLocation: (location: {
-    division?: string;
-    district?: string;
-    upazila?: string;
-    union?: string;
-    div_en?: string
-    dis_en?: string
-    upa_en?: string
-    uni_en?: string
-    university?: {
-    
-    "id": string,
-    "bn_name": string,
-    "en_name": string,
-    "short_form": string,
-    "district": string
-    };
-  }) => void;
-  uni: boolean
-}
-
 export default function Dropdown({setLocation, uni} : DropdownProp) {
     const [divisions, setDivisions] = useState<Location[]>([]);
     const [divisionId, setDivisionId] = useState('');

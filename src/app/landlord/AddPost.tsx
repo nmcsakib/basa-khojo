@@ -6,12 +6,7 @@ import RoomInput from "../components/RoomInput";
 import uploadToImgbb from "../lib/imagebb";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-interface LocationObject {
-  division?: string;
-  district?: string;
-  upazila?: string;
-  union?: string;
-}
+
 
 const AddPost = () => {
   const [files, setFiles] = useState<(File | null)[]>([null, null, null, null]);
@@ -77,7 +72,7 @@ const AddPost = () => {
     toast.loading("অ্যাড করা হচ্ছে...")
     let token = localStorage.getItem("bk_token");
     if(!token){
-      const newToken = `${Math.ceil(Math.random()*999999) + Math.ceil(Math.random()*99999)}`;
+      const newToken = `${Math.ceil(Math.random()*999999) + Math.ceil(Math.random()*99999) - Math.ceil(Math.random()*9999) * Math.ceil(Math.random()*9)}`;
       localStorage.setItem("bk_token", newToken)
       token = newToken
 
@@ -126,7 +121,7 @@ const AddPost = () => {
         toast.success("পোস্টটি অ্যাড করা হয়েছে।")
         console.log("success");
         // console.log("Server response:", result);
-        router.replace(`/landlord/houses?a=${token}`)
+        router.replace(`/landlord/houses`)
       } else {
         toast.dismiss()
         toast.error("দুঃখিত আবার চেষ্টা করুন। ")
@@ -215,9 +210,9 @@ const AddPost = () => {
         </div>
 
         <div className="flex items-center gap-5 flex-wrap">
-          <RoomInput label="Mobile Number 1" type="number" placeholder="+8801XXXXXX" setValue={setMobile1} />
-          <RoomInput label="Mobile Number 2 (Optional)" type="number" placeholder="+8801XXXXXX" setValue={setMobile2} />
-          <RoomInput label="Facebook ID" type="text" placeholder="https://facebook.com" setValue={setFacebook} />
+          <RoomInput label="মোবাইল নাম্বার 1" type="number" placeholder="+8801XXXXXX" setValue={setMobile1} />
+          <RoomInput label="মোবাইল নাম্বার 2 (Optional)" type="number" placeholder="+8801XXXXXX" setValue={setMobile2} />
+          <RoomInput label="Facebook ID Link" type="text" placeholder="https://facebook.com" setValue={setFacebook} />
           <RoomInput label="সিট বাকি" type="number" placeholder="0" setValue={setAvailableRooms} />
           <RoomInput label="ভাড়া " type="number" placeholder="0" setValue={setRent} />
           <RoomInput label="বারান্দা" type="number" placeholder="0" setValue={setBalcony} />

@@ -26,7 +26,11 @@ export async function GET(req: NextRequest) {
   const posts = await (
     await dbConnect(collectionsObj.posts)
   )
-    .aggregate([{ $match: matchStage }])
+    .aggregate([{ $match: {...matchStage,
+     $or: [
+      {approved: {$ne : "pending"}}
+     ]
+    } }])
     .toArray();
 
   return Response.json(posts);

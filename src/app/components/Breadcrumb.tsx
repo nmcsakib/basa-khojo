@@ -3,20 +3,7 @@ import React from "react";
 
 // react icons
 import {MdKeyboardArrowDown} from "react-icons/md";
-interface LocationObject {
-  division?: string;
-  district?: string;
-  upazila?: string;
-  union?: string;
-  university?: {
-    
-    "id": string,
-    "bn_name": string,
-    "en_name": string,
-    "short_form": string,
-    "district": string
-    };
-}
+
 const Breadcrumb = ({location}: {location: LocationObject}) => {
 
     return (

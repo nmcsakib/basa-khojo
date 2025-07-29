@@ -4,38 +4,7 @@ import { useEffect, useState } from "react";
 import Dropdown from "../components/Dropdown";
 import Card from "../components/Card";
 import Modal from "../components/RoleModal";
-
-interface LocationObject {
-  division?: string;
-  district?: string;
-  upazila?: string;
-  union?: string;
-  div_en?: string;
-  dis_en?: string;
-  upa_en?: string;
-  uni_en?: string;
-  university?: {
-    id: string;
-    bn_name: string;
-    en_name: string;
-    short_form: string;
-    district: string;
-  };
-}
-
-interface Post {
-  _id: string;
-  title: string;
-  images: string[];
-  location: {
-    division?: string;
-    university?: {
-      district: string;
-    };
-  };
-  rent: string;
-  availableRooms: string;
-}
+import InstallButton from "../components/InstallButton";
 
 export default function HomeClient() {
   const [location, setLocation] = useState<LocationObject>({});
@@ -46,6 +15,13 @@ export default function HomeClient() {
   const [hasFetched, setHasFetched] = useState(false);
   const [hasRestored, setHasRestored] = useState(false);
 
+  useEffect(() => {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(() => console.log('✅ Service Worker registered'))
+      .catch((err) => console.log('❌ SW registration failed:', err));
+  }
+}, []);
 
   useEffect(() => {
     const savedRole = sessionStorage.getItem("userRole");
@@ -110,11 +86,13 @@ useEffect(() => {
       )}
 
       <main className="max-w-[1600px] mx-auto py-5">
+
         <h1 className="text-2xl font-bold mb-6 text-center text-slate-200 myFont tracking-widest">
           লোকেশান নির্বাচন করুন:
         </h1>
 
         <Dropdown uni={true} setLocation={setLocation} />
+      <InstallButton/>
 
         <div className="w-full min-h-screen p-5">
           {((location.division || location.university) && posts.length > 0) && (

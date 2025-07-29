@@ -55,3 +55,16 @@ cursor: pointer;
 .scrollbar-hide::-webkit-scrollbar {
   display: none;  /* Chrome, Safari, Opera */
 }
+
+ .animated-bg {
+      animation: slideMove 2s ease-in-out infinite;
+    }
+
+    @keyframes slideMove {
+      0%, 100% {
+        transform: translate(-14rem, -6rem) rotate(45deg);
+      }
+      50% {
+        transform: translate(-2rem, -6rem) rotate(45deg);
+      }
+    }

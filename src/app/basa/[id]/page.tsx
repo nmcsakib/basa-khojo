@@ -4,34 +4,7 @@ import Breadcrumb from '@/app/components/Breadcrumb';
 import BasaClient from '@/app/components/BasaClient';
 import { Metadata } from 'next';
 
-interface LocationObject {
-  division?: string;
-  district?: string;
-  upazila?: string;
-  union?: string;
-}
-
-interface BasaProp {
-  _id: string;
-  title: string;
-  gender: string;
-  location: LocationObject;
-  accLoc: string;
-  contacts: string[];
-  facebook: string;
-  rent: string;
-  availableRooms: string;
-  description: string;
-  balcony: string;
-  kitchen: string;
-  wifi: string;
-  images: string[];
-  lastUpdate: string;
-  approved: string;
-}
-
-
-async function fetchBasaById(id: string): Promise<BasaProp | null> {
+async function fetchBasaById(id: string): Promise<Post | null> {
   try {
     const res = await fetch(`${process.env.SERVER}/api/posts/${id}`, {
       cache: 'force-cache',
@@ -39,16 +12,17 @@ async function fetchBasaById(id: string): Promise<BasaProp | null> {
 
     if (!res.ok) return null;
 
-    const basa: BasaProp = await res.json();
+    const basa: Post = await res.json();
     return basa;
   } catch (err) {
+    console.log(err);
     return null;
   }
 }
 
 // Metadata with title
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const id = params.id;
+export async function generateMetadata({ params }: {params: Promise<{ id: string }>}): Promise<Metadata> {
+  const { id } = await params;
   const basa = await fetchBasaById(id);
 
   return {
@@ -56,8 +30,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
-export default async function BasaPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default async function BasaPage({ params }: {params: Promise<{ id: string }>}) {
+  const { id } = await params;
   const basa = await fetchBasaById(id);
 
   if (!basa) return notFound();
