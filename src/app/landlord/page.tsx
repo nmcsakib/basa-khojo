@@ -1,6 +1,6 @@
 
 import { Metadata } from "next";
-import AddPost from "./AddPost";
+import AddPost from "./AddPostForm";
 
 export const metadata: Metadata = {
   title: "Basa Khojo | Add Post",

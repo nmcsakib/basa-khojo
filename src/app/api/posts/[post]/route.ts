@@ -36,19 +36,36 @@ export async function PUT(req: NextRequest, props: Props) {
 
   const { post } = await props.params;
 
-  console.log("Update request for ID:", post);
+  // console.log("Update request for ID:", post);
   const objectId = new ObjectId(post);
 
   const result = await (
     await dbConnect(collectionsObj.posts)
   ).updateOne({ _id: objectId }, {
     $set: {
-      approved: "approved",
+      status: "approved",
       lastUpdate: new Date(),
     },
   });
 
   console.log("MongoDB Update Result:", result);
+
+  return Response.json(result);
+}
+
+
+export async function DELETE(req: NextRequest, props: Props) {
+
+  const { post } = await props.params;
+
+  // console.log("Update request for ID:", post);
+  const objectId = new ObjectId(post);
+
+  const result = await (
+    await dbConnect(collectionsObj.posts)
+  ).deleteOne({ _id: objectId });
+
+  // console.log("MongoDB Update Result:", result);
 
   return Response.json(result);
 }

@@ -24,14 +24,23 @@ export async function GET(req: NextRequest) {
 
   // Connect and fetch filtered posts
   const posts = await (
-    await dbConnect(collectionsObj.posts)
-  )
-    .aggregate([{ $match: {...matchStage,
-     $or: [
-      {approved: {$ne : "pending"}}
-     ]
-    } }])
-    .toArray();
+  await dbConnect(collectionsObj.posts)
+)
+  .aggregate([
+    {
+      $match: {
+        ...matchStage,
+        status: { $ne: "pending" }
+      }
+    },
+    {
+      $sort: {
+        lastUpdate: -1
+      }
+    }
+  ])
+  .toArray();
+
 
   return Response.json(posts);
 }

@@ -3,49 +3,73 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { BiLeftArrow } from "react-icons/bi";
+import { BiLeftArrow, BiTrash } from "react-icons/bi";
 import { FaFacebook } from "react-icons/fa";
 import ContactModal from "@/app/components/ContactModal";
 import { usePathname, useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
+import { AiOutlineLoading } from "react-icons/ai";
 
 export default function BasaClient({ basa }: { basa: Post }) {
   const [mainImage, setMainImage] = useState(basa.images[0]);
-  const [approve, setApprove] = useState('')
+  const [status, setStatus] = useState('')
   const router = useRouter();
   const pathname = usePathname();
   const date = new Date(basa?.lastUpdate);
   const formattedDate = date?.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   const [token, setToken] = useState<string | null>(null);
 
-useEffect(() => {
-  const storedToken = localStorage.getItem("bk_token");
-  setToken(storedToken);
-}, []);
+  useEffect(() => {
+    const storedToken = localStorage.getItem("bk_token");
+    setToken(storedToken);
+  }, []);
 
-const handleUpate = () => {
-  toast.loading("updating...")
-      fetch(`/api/posts/${basa?._id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({}),
+  const handleUpate = () => {
+    toast.loading("updating...")
+    fetch(`/api/posts/${basa?._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({}),
     })
-    .then(response =>  response.json())
-    .then(data => {
-      toast.dismiss()
-       setApprove("Approved")
-       toast.success("Approved")
+      .then(response => response.json())
+      .then(data => {
+        toast.dismiss()
+        setStatus("Approved")
+        toast.success("Approved")
         console.log('Resource updated successfully:', data);
-    })
-    .catch(error => {
-      toast.dismiss()
-       toast.error("Something went wrong")
+      })
+      .catch(error => {
+        toast.dismiss()
+        toast.error("Something went wrong")
         console.error('Error updating resource:', error);
-    });
+      });
 
-}
+  }
+  const handleDelete = () => {
+    toast.loading("deleting...")
+    fetch(`/api/posts/${basa?._id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({}),
+    })
+      .then(response => response.json())
+      .then(data => {
+        toast.dismiss()
+        setStatus("Deleted")
+        toast.success("Deleted")
+        console.log('Resource deleted successfully:', data);
+      })
+      .catch(error => {
+        toast.dismiss()
+        toast.error("Something went wrong")
+        console.error('Error updating resource:', error);
+      });
+
+  }
 
   useEffect(() => {
     window.gtag('config', 'G-G1BVNBHWZH', {
@@ -92,11 +116,23 @@ const handleUpate = () => {
 
           {/* Text Content */}
           <div className="flex flex-col text-white">
-            <h1 className="text-3xl font-medium text-white mb-1 myFont tracking-wider">
+            <div className="flex justify-between items-center"><h1 className="text-3xl font-medium text-white mb-1 myFont tracking-wider">
               {basa.title}
             </h1>
+              {
+              token === basa?.token &&   <div className="flex flex-col justify-center items-center">
+                <Link href={`/landlord/update/${basa?._id}`}
+        className="cursor-pointer group w-30 m-5 md:ml-14 px-6 py-2 border border-[#3B9DF8] bg-[#3B9DF8] text-white hover:bg-transparent transition duration-300 rounded flex justify-center items-center gap-2 font-sans"
+      > <AiOutlineLoading className="group-focus:animate-spin group-focus:opacity-100 font-bold text-lg opacity-0"/> Update
+      </Link>
+      <button onClick={handleDelete}
+        className="cursor-pointer group w-30 m-5 md:ml-14 px-6 py-2 border border-[#ff9393] bg-[#ff6060] text-white hover:bg-transparent transition duration-300 rounded flex justify-center items-center gap-2 font-sans"
+      > <BiTrash/> Delete
+      </button>
+              </div>
+              }</div>
             <span className="text-green-400">{basa.accLoc}</span>
-            
+
             <p className="text-red-400 animate-pulse text-xl mt-3">
               সিট বাকি: {basa.availableRooms}
             </p>
@@ -126,21 +162,21 @@ const handleUpate = () => {
             <p className="text-xl mt-3">{basa.description}</p>
 
             {
-              (token === "admin" && basa?.approved !== "approved") &&  <div className="flex justify-end items-center gap-6">
-              <button disabled={approve === "Approved"} onClick={ handleUpate } className="cursor-pointer px-6 py-3 border border-[#06aa97] bg-[#06aa97] text-[#fff] hover:bg-white hover:text-[#06aa97] dark:hover:bg-transparent transition duration-300 rounded ">
-                            Approve
-                        </button>
-                        <button className="cursor-pointer px-6 py-3 border border-[#ff7b9c] bg-[#ff7b9c] text-[#fff] hover:bg-white hover:text-[#ff7b9c] dark:hover:bg-transparent transition duration-300 rounded ">
-                            Delete
-                        </button>
+              (token === "admin" && basa?.status !== "approved") && <div className="flex justify-end items-center gap-6">
+                <button disabled={status === "Approved"} onClick={handleUpate} className="cursor-pointer px-6 py-3 border border-[#06aa97] bg-[#06aa97] text-[#fff] hover:bg-white hover:text-[#06aa97] dark:hover:bg-transparent transition duration-300 rounded ">
+                  Approve
+                </button>
+                <button onClick={handleDelete} className="cursor-pointer px-6 py-3 border border-[#ff7b9c] bg-[#ff7b9c] text-[#fff] hover:bg-white hover:text-[#ff7b9c] dark:hover:bg-transparent transition duration-300 rounded ">
+                  Delete
+                </button>
               </div>
-              
+
             }
-            { (token === "admin" && !approve) ? (basa?.approved || "approved") : token === "admin" && "Approved"}
+            {token === "admin" && basa?.status }
           </div>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 }

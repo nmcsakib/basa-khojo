@@ -4,10 +4,10 @@ import Breadcrumb from '@/app/components/Breadcrumb';
 import BasaClient from '@/app/components/BasaClient';
 import { Metadata } from 'next';
 
-async function fetchBasaById(id: string): Promise<Post | null> {
+export async function fetchBasaById(id: string): Promise<Post | null> {
   try {
     const res = await fetch(`${process.env.SERVER}/api/posts/${id}`, {
-      cache: 'force-cache',
+      cache: 'no-cache',
     });
 
     if (!res.ok) return null;

@@ -12,6 +12,7 @@ interface Post {
     _id: string;
   title: string;
   gender: string;
+  token: string;
   location: LocationObject;
   accLoc: string;
   contacts: string[];
@@ -24,7 +25,7 @@ interface Post {
   wifi: string;
   images: string[];
   lastUpdate: string;
-  approved: string;
+  status: string;
     }
 
 interface DropdownProp {

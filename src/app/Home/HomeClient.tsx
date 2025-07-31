@@ -5,6 +5,7 @@ import Dropdown from "../components/Dropdown";
 import Card from "../components/Card";
 import Modal from "../components/RoleModal";
 import InstallButton from "../components/InstallButton";
+import { AiOutlineLoading } from "react-icons/ai";
 
 export default function HomeClient() {
   const [location, setLocation] = useState<LocationObject>({});
@@ -111,7 +112,7 @@ useEffect(() => {
           )}
 
           {loading && (
-            <div className="text-2xl text-white text-center">লোড হচ্ছে...</div>
+            <h1 className="text-2xl text-white text-center flex justify-center items-center gap-2"><AiOutlineLoading className="animate-spin font-bold"/>লোড হচ্ছে...</h1>
           )}
 
           {!loading && hasFetched && posts.length === 0 && (
