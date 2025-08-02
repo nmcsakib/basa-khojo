@@ -1,12 +1,9 @@
 
 import { MetadataRoute } from 'next';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://basa-khojo.vercel.app';
 
-  // For now, we will manually add the static pages.
-  // In the future, you can fetch dynamic routes (e.g., from a database)
-  // and add them to the sitemap.
   const staticRoutes = [
     '/',
     '/asbabpotro',
@@ -14,10 +11,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/landlord/houses',
   ];
 
-  const sitemap = staticRoutes.map((route) => ({
+  const staticSitemap = staticRoutes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
   }));
 
-  return sitemap;
+  const res = await fetch(`${baseUrl}/api/posts`);
+  const posts: Post[] = await res.json();
+
+  const dynamicSitemap = posts.map((post) => ({
+    url: `${baseUrl}/basa/${post._id}`,
+    lastModified: new Date(post.lastUpdate),
+  }));
+
+  return [...staticSitemap, ...dynamicSitemap];
 }

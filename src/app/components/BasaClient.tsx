@@ -93,7 +93,8 @@ export default function BasaClient({ basa }: { basa: Post }) {
             <div className="rounded-lg overflow-hidden mb-4">
               <Image
                 src={mainImage}
-                alt="Main image"
+                alt={basa.title}
+                aria-label={`${basa.title} - Main Image`}
                 width={1280}
                 height={720}
                 className="w-full h-auto object-cover border border-white"
@@ -148,21 +149,31 @@ export default function BasaClient({ basa }: { basa: Post }) {
                 <FaFacebook /> Facebook ID
               </Link>
             </div>
-            <h2 className="text-3xl font-medium">বিস্তারিত:</h2>
-            <table className="table-auto border-collapse text-lg border w-full lg:w-3/4 mt-3 mb-6">
-              <tbody>
-                <tr><td className="border text-center">ওয়াইফাই</td><td className="border text-center">{basa.wifi}</td></tr>
-                <tr><td className="border text-center">বেডরুম</td><td className="border text-center">{basa.availableRooms}</td></tr>
-                <tr><td className="border text-center">কিচেন</td><td className="border text-center">{basa.kitchen}</td></tr>
-                <tr><td className="border text-center">বাথরুম</td><td className="border text-center">{basa.balcony}</td></tr>
-                <tr><td className="border text-center">বারান্দা</td><td className="border text-center">{basa.balcony}</td></tr>
-              </tbody>
-            </table>
-            <h2 className="text-3xl font-medium">সুবিধা সমূহ:</h2>
-            <p className="text-xl mt-3">{basa.description}</p>
+            <section aria-labelledby="details-heading">
+              <h2 id="details-heading" className="text-3xl font-medium">বিস্তারিত:</h2>
+              <table className="table-auto border-collapse text-lg border w-full lg:w-3/4 mt-3 mb-6">
+                <tbody>
+                  <tr><td className="border text-center">ওয়াইফাই</td><td className="border text-center">{basa.wifi}</td></tr>
+                  <tr><td className="border text-center">বেডরুম</td><td className="border text-center">{basa.availableRooms}</td></tr>
+                  <tr><td className="border text-center">কিচেন</td><td className="border text-center">{basa.kitchen}</td></tr>
+                  <tr><td className="border text-center">বাথরুম</td><td className="border text-center">{basa?.bathroom || 1}</td></tr>
+                  <tr><td className="border text-center">বারান্দা</td><td className="border text-center">{basa.balcony}</td></tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section aria-labelledby="amenities-heading">
+              <h2 id="amenities-heading" className="text-3xl font-medium">সুবিধা সমূহ:</h2>
+              <p className="text-xl mt-3">{basa.description}</p>
+            </section>
+
+            <section aria-labelledby="location-heading">
+              <h2 id="location-heading" className="text-3xl font-medium">Location:</h2>
+              <p className="text-xl mt-3">{basa.location.uni_en || basa.location.upa_en}, {basa.location.dis_en}</p>
+            </section>
 
             {
-              (token === "admin" && basa?.status !== "approved") && <div className="flex justify-end items-center gap-6">
+              ((token === "admin" || token === "559385") && basa?.status !== "approved") && <div className="flex justify-end items-center gap-6">
                 <button disabled={status === "Approved"} onClick={handleUpate} className="cursor-pointer px-6 py-3 border border-[#06aa97] bg-[#06aa97] text-[#fff] hover:bg-white hover:text-[#06aa97] dark:hover:bg-transparent transition duration-300 rounded ">
                   Approve
                 </button>
@@ -172,7 +183,7 @@ export default function BasaClient({ basa }: { basa: Post }) {
               </div>
 
             }
-            {token === "admin" && basa?.status }
+            {(token === "admin" || token === "559385") && basa?.status }
           </div>
         </div>
       </div>

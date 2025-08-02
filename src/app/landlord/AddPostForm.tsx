@@ -2,10 +2,6 @@
 
 import React from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-// import RoomInput from '../RoomInput';
-// import Dropdown from '../Dropdown';
-// import ImageUploader from './ImageUploader';
-// import { roomInputs } from './InputsConfig';
 import { usePostForm } from '@/hooks/usePostForm';
 import uploadToImgbb from '@/app/lib/imagebb';
 import { toast } from 'react-toastify';
@@ -81,6 +77,7 @@ const AddPostForm = ({ basa }: { basa?: Post }) => {
       availableRooms: formData.availableRooms,
       description: formData.description,
       balcony: formData.balcony,
+      bathroom: formData.bathroom,
       kitchen: formData.kitchen,
       wifi: formData.wifi,
       images: uploadedLinks.filter(Boolean),

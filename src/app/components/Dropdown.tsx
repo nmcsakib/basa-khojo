@@ -50,14 +50,14 @@ export default function Dropdown({setLocation, uni} : DropdownProp) {
     "bn_name": "চট্টগ্রাম বিশ্ববিদ্যালয়",
     "en_name": "University of Chittagong",
     "short_form": "CU",
-    "district": "Chittagong"
+    "district": "Chattogram"
   },
   {
     "id": "6",
     "bn_name": "জাহাঙ্গীরনগর বিশ্ববিদ্যালয়",
     "en_name": "Jahangirnagar University",
     "short_form": "JU",
-    "district": "Gazipur"
+    "district": "Dhaka"
   },
   {
     "id": "7",
@@ -81,20 +81,6 @@ export default function Dropdown({setLocation, uni} : DropdownProp) {
     "district": "Khulna"
   },
   {
-    "id": "10",
-    "bn_name": "জাতীয় বিশ্ববিদ্যালয়",
-    "en_name": "National University Bangladesh",
-    "short_form": "NU",
-    "district": "Gazipur"
-  },
-  {
-    "id": "11",
-    "bn_name": "বাংলাদেশ মুক্ত বিশ্ববিদ্যালয়",
-    "en_name": "Bangladesh Open University",
-    "short_form": "BOU",
-    "district": "Gazipur"
-  },
-  {
     "id": "12",
     "bn_name": "বাংলাদেশ ইউনিভার্সিটি অব প্রফেশনালস",
     "en_name": "Bangladesh University of Professionals",
@@ -113,20 +99,6 @@ export default function Dropdown({setLocation, uni} : DropdownProp) {
     "bn_name": "মিলিটারি ইনস্টিটিউট অব সায়েন্স অ্যান্ড টেকনোলজি",
     "en_name": "Military Institute of Science and Technology",
     "short_form": "MIST",
-    "district": "Dhaka"
-  },
-  {
-    "id": "15",
-    "bn_name": "বাংলাদেশ প্রকৌশল ও প্রযুক্তি বিশ্ববিদ্যালয়",
-    "en_name": "Bangabandhu Sheikh Mujibur Rahman Agricultural University",
-    "short_form": "BSMRAU",
-    "district": "Gazipur"
-  },
-  {
-    "id": "16",
-    "bn_name": "বাংলাদেশ শেখ মুজিব মেডিক্যাল বিশ্ববিদ্যালয়",
-    "en_name": "Bangabandhu Sheikh Mujib Medical University",
-    "short_form": "BSMMU",
     "district": "Dhaka"
   },
   {
@@ -214,13 +186,6 @@ export default function Dropdown({setLocation, uni} : DropdownProp) {
     "district": "Chittagong"
   },
   {
-    "id": "29",
-    "bn_name": "জয়শোর বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয়",
-    "en_name": "Jashore University of Science & Technology",
-    "short_form": "JUST",
-    "district": "Jessore"
-  },
-  {
     "id": "30",
     "bn_name": "বেগম রোকেয়া বিশ্ববিদ্যালয়, রংপুর",
     "en_name": "Begum Rokeya University",
@@ -240,13 +205,6 @@ export default function Dropdown({setLocation, uni} : DropdownProp) {
     "en_name": "University of Barisal",
     "short_form": "BU",
     "district": "Barisal"
-  },
-  {
-    "id": "33",
-    "bn_name": "ইসলামী আরবি বিশ্ববিদ্যালয়",
-    "en_name": "Islamic Arabic University",
-    "short_form": "IAU",
-    "district": "Dhaka"
   },
   {
     "id": "34",
@@ -282,13 +240,6 @@ export default function Dropdown({setLocation, uni} : DropdownProp) {
     "en_name": "Bangabandhu Sheikh Mujibur Rahman Digital University",
     "short_form": "BDU",
     "district": "Gazipur"
-  },
-  {
-    "id": "39",
-    "bn_name": "শেখ হাসিনা বিশ্ববিদ্যালয়",
-    "en_name": "Sheikh Hasina University",
-    "short_form": "SHU",
-    "district": "Netrokona"
   },
   {
     "id": "40",
@@ -373,20 +324,6 @@ export default function Dropdown({setLocation, uni} : DropdownProp) {
     "en_name": "Kurigram Agricultural University",
     "short_form": "KURIAGRI",
     "district": "Kurigram"
-  },
-  {
-    "id": "52",
-    "bn_name": "নওগাঁ বিশ্ববিদ্যালয়",
-    "en_name": "Bangabandhu Sheikh Mujibur Rahman University, Naogaon",
-    "short_form": "Naogaon University",
-    "district": "Naogaon"
-  },
-  {
-    "id": "53",
-    "bn_name": "মুজিবনগর বিশ্ববিদ্যালয়",
-    "en_name": "Meherpur University",
-    "short_form": "Meherpur University",
-    "district": "Meherpur"
   }
 ]
 

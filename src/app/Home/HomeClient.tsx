@@ -87,6 +87,10 @@ useEffect(() => {
       )}
 
       <main className="max-w-[1600px] mx-auto py-5">
+        <div className="text-center mb-8">
+          <h2 className="text-4xl font-bold text-slate-100 tracking-tight">Find Your Next Home: Flats, Houses & Mess</h2>
+          <p className="text-slate-300 mt-2">Search thousands of verified listings for rent across Bangladesh. Your new home is just a few clicks away.</p>
+        </div>
 
         <h1 className="text-2xl font-bold mb-6 text-center text-slate-200 myFont tracking-widest">
           লোকেশান নির্বাচন করুন:

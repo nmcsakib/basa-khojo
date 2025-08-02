@@ -5,6 +5,7 @@ export const roomInputs = [
   { label: "সিট বাকি", name: "availableRooms", type: "number", placeholder: "0" },
   { label: "ভাড়া ", name: "rent", type: "number", placeholder: "0" },
   { label: "বারান্দা", name: "balcony", type: "number", placeholder: "0" },
+  { label: "বাথরুম", name: "bathroom", type: "number", placeholder: "0" },
   { label: "কিচেন", name: "kitchen", type: "number", placeholder: "0" },
   { label: "ওয়াইফাই", name: "wifi", type: "text", placeholder: "Yes/No" },
 ];

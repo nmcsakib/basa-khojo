@@ -7,8 +7,7 @@ interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
 }
 
-interface Post {
-    
+interface Post {    
     _id: string;
   title: string;
   gender: string;
@@ -21,6 +20,7 @@ interface Post {
   availableRooms: string;
   description: string;
   balcony: string;
+  bathroom: string;
   kitchen: string;
   wifi: string;
   images: string[];
